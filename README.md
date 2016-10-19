@@ -116,7 +116,7 @@ This renders as:
 
 <img src="http://prust.github.io/lightning-layout/example-2-1x.png" alt="complex layout example" srcset="http://prust.github.io/lightning-layout/example-2-1x.png 1x, http://prust.github.io/lightning-layout/example-2-2x.png 2x"/>
 
-You can view and play with this example live at http://prust.github.io/lightning-layout.
+You can view and play with this example live at http://prust.github.io/lightning-layout. 
 
 ## To-Do
 
