@@ -20,7 +20,8 @@
           global_height = window.innerHeight,
           ratio = getRatio(),
           canvas = document.getElementById('canvas'),
-          ctx = canvas.getContext('2d');
+          ctx = canvas.getContext('2d'),
+          ll = new LightningLayout(canvas);
 
       function setup() {
         addEventListener('resize', rescale);
@@ -40,7 +41,8 @@
 
       function update() {
         ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-        lightningLayout(ctx, layout2, 0, 0, global_width, global_height);
+        ll.layout(ctx, layout2, 0, 0, global_width, global_height);
+        ll.render(ctx, layout2);
         requestAnimationFrame(update);
       }
 
@@ -107,6 +109,13 @@ var layout2 = {
     borderColor: '#999999'
   }]
 };
+
+ll.addEventSupport(layout2, true);
+var footer = layout2.children[2];
+footer.addEventListener('click', function(evt) {
+  console.log('Footer clicked');
+});
+
     </script>
   </body>
 </html>
