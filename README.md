@@ -163,10 +163,23 @@ LightningLayout is not quite production-ready. The 4 most glaring omissions are 
 
 ## To-Do
 
+These need to be implemented in the layout engine itself:
+
 * add support for separately specifying padding, borderColor and borderWidth (`paddingLeft`, `borderLeftColor`, `borderLeftWidth`), as well as for shorthand formats that specify 2, 3 or 4 values (ex: `"2px 3px 0 0"`)
 * implement text wrapping
 * add support for rounded rectangles (all corners or individual corners)
 * implement `overflow: auto/scroll/hidden` & `textOverflow: ellipsis`
+* implement `position: "flow-x"` and `position: "flow-y"`. This would enable clients to easily display all the options in an option menu, for instance, without pulling into our laps all the complexities of `position: "static"` (the CSS default positioning), which has to place items in a row and then wrap them down to the next row, while dealing with variable height items, etc.
 * allow a space-delimited className property that can apply a set of styles
-* define an example set of styles that mimic Bootstrap buttons, alerts, drop-downs, modals, etc
 * add support for background images
+* make a more friendly method of custom rendering/layout (emitting an event or providing a hook)
+
+## Non-Core To-Do
+
+These should be done outside of the layout engine:
+
+* implement the most popular Bootstrap CSS classes (for buttons, modals, drop-downs, etc)
+* implement the most popular Bootstrap components (dropdowns, modals, etc)
+* write a mustache/handlebars-like templating engine
+* test the 3rd-party canvas-based text-input controls (see above), writeup their pros/cons & make sure it's super-easy to use the best one(s) with Lightning Layout
+* test & document using glyphicons & fontawesome icons with Lightning Layout (perhaps provide CSS classes, if helpful)
