@@ -145,3 +145,9 @@ These should be done outside of the layout engine:
 * write a mustache/handlebars-like templating engine
 * test the 3rd-party canvas-based text-input controls (see above), writeup their pros/cons & make sure it's super-easy to use the best one(s) with Lightning Layout
 * test & document using glyphicons & fontawesome icons with Lightning Layout (perhaps provide CSS classes, if helpful)
+
+## Similar Projects
+
+* Facebook's [css-layout](https://github.com/facebook/css-layout) performs layout (but not rendering) of the CSS flexbox model. It is primarily used by React Native, so it's currently just in C, Java, Objective-C and C#. But there used to be a Javascript version; if you go back in the history of the repo you should be able to find it.
+* [twinkle](https://github.com/rschoenstein/twinkle): GPU-accelerated UI framework powered by JavaScript for desktop/mobile apps. "Repo on hold: Current development is continuing in a private branch due to modifications not being license compatible with open-source. Hoping to be able to resurface these changes at a later time."
+* **Other:** If you know of other similar projects, please submit an issue or pull request. I saw some before starting this project, but none seemed like it was going in quite the direction I wanted, so I didn't write them down :-(
