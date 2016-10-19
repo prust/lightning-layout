@@ -61,7 +61,7 @@ lightningLayout(ctx, layout, 0, 0, canvas.width, canvas.height);
 
 This is basically the Gibbon example from [Jafar Husain's presentation](https://www.youtube.com/watch?v=eNC0mRYGWgc). Here's how lightningLayout renders it:
 
-<img src="http://prust.github.io/lightning-layout/example-1-1x.png" alt="simple layout example" srcset="http://prust.github.io/lightning-layout/example-1-1x.png 1x, http://prust.github.io/lightning-layout/example-1-2x.png 2x"/>
+<img src="http://prust.github.io/lightning-layout/example-1-2x.png" width="236" alt="simple layout example" srcset="http://prust.github.io/lightning-layout/example-1-1x.png 1x, http://prust.github.io/lightning-layout/example-1-2x.png 2x"/>
 
 ## Example 2
 
@@ -114,9 +114,9 @@ lightningLayout(ctx, layout, 0, 0, canvas.width, canvas.height);
 
 This renders as:
 
-<img src="http://prust.github.io/lightning-layout/example-2-1x.png" alt="complex layout example" srcset="http://prust.github.io/lightning-layout/example-2-1x.png 1x, http://prust.github.io/lightning-layout/example-2-2x.png 2x"/>
+<img src="http://prust.github.io/lightning-layout/example-2-2x.png" width="930" alt="complex layout example" srcset="http://prust.github.io/lightning-layout/example-2-1x.png 1x, http://prust.github.io/lightning-layout/example-2-2x.png 2x"/>
 
-You can view and play with this example live at http://prust.github.io/lightning-layout. 
+You can view and play with this example live at http://prust.github.io/lightning-layout.
 
 ## To-Do
 
