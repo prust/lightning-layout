@@ -3,7 +3,7 @@
     <title>Canvas Boilerplate</title>
     <style type="text/css">
       *,html{
-        margin: 0;padding: 0;
+        margin: 0; padding: 0;
       }
       canvas { 
         width: 100%;
@@ -22,9 +22,9 @@
           ctx = canvas.getContext('2d');
 
       function setup() {
-        requestAnimationFrame(update);
         addEventListener('resize', rescale);
         rescale();
+        requestAnimationFrame(update);
       }
 
       function rescale() {
@@ -35,11 +35,6 @@
         canvas.height = global_height * ratio;
         canvas.style.width = global_width + "px";
         canvas.style.height = global_height + "px";
-        draw();
-      }
-
-      function init() {
-        draw();
       }
 
       function drawWidget(widget, parent_x1, parent_y1, parent_x2, parent_y2) {
@@ -48,9 +43,11 @@
         var x2 = parent_x2;
         var y2 = parent_y2;
         
-        if (widget.top)
+        if (widget.top != null)
           y1 += widget.top;
-        if (widget.left)
+        else if (widget.bottom != null && widget.height != null)
+          y1 = y2 - widget.bottom - widget.height;
+        if (widget.left != null)
           x1 += widget.left;
         
         if (widget.text) {
@@ -61,18 +58,18 @@
 
         var padding = widget.padding || 0;
 
-        if (widget.bottom)
+        if (widget.bottom != null)
           y2 -= widget.bottom;
-        else if (widget.height)
+        else if (widget.height != null)
           y2 = y1 + widget.height;
         else if (metrics)
           y2 = y1 + metrics.height + padding * 2;
 
-        if (widget.right)
+        if (widget.right != null)
           x2 -= widget.right;
-        else if (widget.width)
+        else if (widget.width != null)
           x2 = x1 + widget.width;
-        else if (metrics)
+        else if (metrics != null)
           x2 = x1 + metrics.width + padding * 2;
 
         if (widget.backgroundColor) {
@@ -98,16 +95,9 @@
         }
       }
 
-      function draw() {
-        ctx.save();
-        //ctx.scale(ratio, ratio);
+      function update() {
         ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-        drawWidget(layout2, 0, 0, global_width * ratio, global_height * ratio);
-        ctx.restore();
-      }
-
-      function update() { 
+        drawWidget(layout2, 0, 0, global_width, global_height);
         requestAnimationFrame(update);
       }
 
@@ -137,8 +127,8 @@
 
       var layout2 = {
         backgroundColor: "#2C425C",
-        width: 200,
         height: 200,
+        bottom: 0,
         color: "#FFFFFF",
         children: [{
           borderColor: "red",
