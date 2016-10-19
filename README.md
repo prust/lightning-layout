@@ -23,7 +23,7 @@ lightningLayout(canvas_ctx, element_obj, parent_x1, parent_y1, parent_x2, parent
 ```
 
 * `canvas_ctx`  - the 2D context object from the canvas
-* `element_obj` - the top of your hierarchy of lightweight elements (plain javascript objects with optional style properties & an optional `children` property)
+* `element_obj` - the top of your hierarchy of lightweight elements: plain javascript objects with optional style properties (see below) & an optional `children` array
 * `parent_x1`, `parent_y1` - the top-left coordinates of the canvas, typically `0, 0`
 * `parent_x2`, `parent_y2` - the bottom-right coordinates of the canvas, typically the width and height of the canvas
 
@@ -31,10 +31,11 @@ lightningLayout(canvas_ctx, element_obj, parent_x1, parent_y1, parent_x2, parent
 
 * `left`, `right`, `top`, `bottom` - these can be numbers or percentages and will position the edge of the element relative to its parent
 * `width`, `height` - these will be used to calculate unsupplied edges (for instance if a `right` and `width` properties are given, the `left` will be calculated)
+* `font` - [css font string](https://developer.mozilla.org/en-US/docs/Web/CSS/font) defining the font style, size and face
 * `text` - text to display inside the element (if `width` and `right` are not supplied, the element is "shrink-wrapped" to the text; the same things happens vertically if `height` and `bottom` are not supplied). If no text is supplied, the element will default to 100% width and 100% height, respectively.
 * `padding` - single number used for padding on all four sides (TODO: support separate padding values for each side)
-* `backgroundColor` - css color value for the border (transparent if not supplied)
-* `borderColor` - css color value for the border (no border is rendered if this is not supplied)
+* `backgroundColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (transparent if not supplied)
+* `borderColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (no border is rendered if this is not supplied)
 * `borderWidth` - number for the width of the border (TODO: render the borders inside the element instead of half inside and half outside)
 
 ## Example 1
@@ -121,10 +122,11 @@ You can view and play with this example live at http://prust.github.io/lightning
 
 In addition to the `TODO`'s mentioned above:
 
+* implement text wrapping
 * listen for mouse events on the canvas and "bubble" them to the appropriate lightweight elements
+* implement `overflow: auto/scroll/hidden` & `textOverflow: ellipsis`
 * allow objects to handle their own rendering, for instance a canvas-based text-input control ([here](https://github.com/goldfire/CanvasInput), [here](https://github.com/claydotio/Canvas-Input/) or [here](https://github.com/barmalei/zebra))
 * add support for background (and foreground?) images
-* add a fontStyle property
 * add support for rounded rectangles (all corners or individual corners)
 * allow a space-delimited className property that can apply a set of styles
 * define an example set of styles that mimic Bootstrap buttons, alerts, drop-downs, modals, etc

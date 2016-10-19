@@ -29,7 +29,7 @@
       x2 = x1 + val(widget.width, parent_width);
 
     if (widget.text) {
-      ctx.font = '12pt Helvetica';
+      ctx.font = widget.font || '12pt Helvetica';
       var metrics = ctx.measureText(widget.text);
       metrics.height = 12;
 
