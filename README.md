@@ -96,7 +96,7 @@ ll.render(ctx, element_obj);
 
 This renders as:
 
-<img src="http://prust.github.io/lightning-layout/example-2-2x.png" width="930" alt="complex layout example" srcset="http://prust.github.io/lightning-layout/example-2-1x.png 1x, http://prust.github.io/lightning-layout/example-2-2x.png 2x"/>
+<img src="http://prust.github.io/lightning-layout/example-2-2x.png" width="878" alt="complex layout example" srcset="http://prust.github.io/lightning-layout/example-2-1x.png 1x, http://prust.github.io/lightning-layout/example-2-2x.png 2x"/>
 
 You can view and play with this example live at http://prust.github.io/lightning-layout.
 
