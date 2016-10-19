@@ -38,32 +38,101 @@
         draw();
       }
 
-      function init(){
+      function init() {
         draw();
       }
 
-      function drawExample(){
-        ctx.lineWidth = 6;
-        ctx.strokeStyle = "#333";
-        ctx.beginPath();
-        ctx.moveTo((global_width/2)-200, (global_height/2)-200);
-        ctx.bezierCurveTo(150, 100, 350, 100, 400, 250);
-        ctx.stroke();
+      function drawWidget(widget, parent_x1, parent_y1, parent_x2, parent_y2) {
+        var x1 = parent_x1;
+        var y1 = parent_y1;
+        var x2 = parent_x2;
+        var y2 = parent_y2;
+        
+        if (widget.top)
+          y1 += widget.top;
+        if (widget.left)
+          x1 += widget.left;
+        
+        if (widget.text) {
+          ctx.font = 'bold 12pt arial';
+          var metrics = ctx.measureText(widget.text);
+          metrics.height = 12;
+        }
+
+        var padding = widget.padding || 0;
+
+        if (widget.bottom)
+          y2 -= widget.bottom;
+        else if (widget.height)
+          y2 = y1 + widget.height;
+        else if (metrics)
+          y2 = y1 + metrics.height + padding * 2;
+
+        if (widget.right)
+          x2 -= widget.right;
+        else if (widget.width)
+          x2 = x1 + widget.width;
+        else if (metrics)
+          x2 = x1 + metrics.width + padding * 2;
+
+        if (widget.backgroundColor) {
+          ctx.fillStyle = widget.backgroundColor;
+          ctx.fillRect(x1, y1, x2-x1, y2-y1);
+        }
+
+        if (widget.borderColor) {
+          ctx.strokeStyle = widget.borderColor;
+          ctx.strokeRect(x1, y1, x2-x1, y2-y1);
+        }
+
+        if (widget.text) {
+          ctx.fillStyle = widget.color;
+          ctx.fillText(widget.text, x1 + padding, y1 + metrics.height + padding);
+        }
+
+        if (widget.children) {
+          widget.children.forEach(function(child) {
+            drawWidget(child, x1, y1, x2, y2);
+          });
+        }
       }
 
       function draw(){
         ctx.save();
         ctx.scale(ratio, ratio);
-        // Execute your draw specific functions between the lines to enable high-dpi drawing
-        // ---------------------------------------------------------------------------------
-        drawExample();
-        // ---------------------------------------------------------------------------------
+
+        drawWidget(layout2, 0, 0, global_width * ratio, global_height * ratio);
         ctx.restore();
       }
 
       function update(){ 
         requestAnimationFrame(update);
       }
+
+      var layout1 = {
+        backgroundColor: "#2C425C",
+        width: 200,
+        height: 200,
+        color: "#FFFFFF",
+        children: [{
+          backgroundColor: "#6BFEF2",
+          color: "#32363B",
+          text: "Hello World"
+        }]
+      };
+
+      var layout2 = {
+        backgroundColor: "#2C425C",
+        width: 200,
+        height: 200,
+        color: "#FFFFFF",
+        children: [{
+          backgroundColor: "#6BFEF2",
+          padding: 10,
+          color: "#32363B",
+          text: "Hello World"
+        }]
+      };
     </script>
   </body>
 </html>
