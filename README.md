@@ -116,3 +116,15 @@ This renders as:
 ![complex layout example](http://prust.github.io/lightning-layout/example-2.png)
 
 You can view and play with this example live at http://prust.github.io/lightning-layout.
+
+## To-Do
+
+In addition to the `TODO`'s mentioned above:
+
+* listen for mouse events on the canvas and "bubble" them to the appropriate lightweight elements
+* allow objects to handle their own rendering, for instance a canvas-based text-input control ([here](https://github.com/goldfire/CanvasInput), [here](https://github.com/claydotio/Canvas-Input/) or [here](https://github.com/barmalei/zebra))
+* add support for background (and foreground?) images
+* add a fontStyle property
+* add support for rounded rectangles (all corners or individual corners)
+* allow a space-delimited className property that can apply a set of styles
+* define an example set of styles that mimic Bootstrap buttons, alerts, drop-downs, modals, etc
