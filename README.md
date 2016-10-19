@@ -140,6 +140,7 @@ These need to be implemented in the layout engine itself:
 
 These should be done outside of the layout engine:
 
+* investigate handing off to [Pixi.js](http://www.pixijs.com/) for maximum rendering performance
 * implement the most popular Bootstrap CSS classes (for buttons, modals, drop-downs, etc)
 * implement the most popular Bootstrap components (dropdowns, modals, etc)
 * write a mustache/handlebars-like templating engine
