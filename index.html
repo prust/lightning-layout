@@ -15,22 +15,20 @@
   <body onload="setup();">
     <canvas id="canvas"></canvas>
     <script type="text/javascript">
-      /* GLOBAL */
-      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
       var global_width = window.innerWidth,
           global_height = window.innerHeight,
           ratio = 1,
           canvas = document.getElementById('canvas'),
           ctx = canvas.getContext('2d');
-      /* SETUP */
-      function setup(){
-        if (ctx){
-          init();
-          requestAnimationFrame(update);
-          window.addEventListener('resize', rescale);
-          rescale();
-        }
+
+      function setup() {
+        init();
+        requestAnimationFrame(update);
+        addEventListener('resize', rescale);
+        rescale();
       }
+
       function rescale(){
         global_width = window.innerWidth;
         global_height = window.innerHeight;
@@ -39,11 +37,11 @@
         canvas.setAttribute('height', global_height*ratio);
         draw();
       }
-      /* INIT */
+
       function init(){
         draw();
       }
-      /* DRAW */
+
       function drawExample(){
         ctx.lineWidth = 6;
         ctx.strokeStyle = "#333";
@@ -52,6 +50,7 @@
         ctx.bezierCurveTo(150, 100, 350, 100, 400, 250);
         ctx.stroke();
       }
+
       function draw(){
         ctx.save();
         ctx.scale(ratio, ratio);
@@ -61,7 +60,7 @@
         // ---------------------------------------------------------------------------------
         ctx.restore();
       }
-      /* UPDATE */
+
       function update(){ 
         requestAnimationFrame(update);
       }
