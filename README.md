@@ -4,6 +4,8 @@
 
 Lightning Layout is designed to enable app development on top of a thin, extensible runtime, like [nanocanvas](https://github.com/syoyo/nanocanvas) or Cocoon's [Canvas+ engine](http://docs.cocoon.io/article/canvas-engine/). These runtimes don't provide a DOM or a CSS layout engine, so Lightning Layout fills the gap with a minimal (but capable) solution.
 
+Lightning Layout also provides event bubbling for mouse and touch events, see "Event Support" below.
+
 Lightning Layout's design goals are (in order): **simplicity** and **speed**. It is inspired by Netflix's (closed-source) [Gibbon](https://www.youtube.com/watch?v=eNC0mRYGWgc) and shares many similarities with Gibbon:
 
 * JSON is used for declarative layout (instead of HTML)
@@ -132,9 +134,13 @@ ll.addEventSupport(obj[, should_cascade])
 
 `addEventSupport()` adds basic event support to a javascript object by implementing two functions: `addEventListener(evt_name, fn)` and `dispatchEvent(evt)`. These functions dynamically add an object property, `._evt_handlers = {}`, the first time `addEventListener()` is called. If your objects share a common prototype, you can pass that for better performance: `ll.addEventSupport(MyObject.prototype)`. Or, if you want to decorate every object in the tree, supply `true` for `should_cascade`.
 
-If the canvas element was passed to `new LightningLayout()` and the objects have event support (a `dispatchEvent()` method), then all mouse and touch events will propagate up the object tree, starting with the children and propagating up to the parents. If siblings overlap, the event will be dispatched in reverse order, starting with the last sibling.
+## Event Support
 
-The `dispatchEvent()` method added in `addEventSupport()` respects `evt.stopImmediatePropagation()`, but only if `evt.isImmediatePropagationStopped()` is supported by the browser/runtime. Likewise the event propagation respects `evt.stopPropagation()`, but only if  `evt.isPropagationStopped()` is supported by the browser/runtime.
+Lightning Layout provides event propagation (bubbling) of mouse events (`mousemove`, `mousedown`, `mouseup`, `click`) and touch events (`touchstart`, `touchend`, `touchmove`, `touchcancel`). Events propagate up the object tree, starting with the children and propagating up to the parents. If siblings overlap each-other (both are under the mouse cursor), the event will be dispatched in reverse order, starting with the last sibling.
+
+To take advantage of the event support, you need to pass the canvas element (or whatever object your runtime provides to listen for events via `addEventListener()`) to the `LightningLayout()` constructor. If your element objects already support events (already have `dispatchEvent()` and `addEventListener()` methods) then this is all you need to do. However, if you are using plain javascript objects or a custom class that does not provide event support, you will need to call `ll.addEventSupport()` (see above). If you are using an event system that uses non-standard event methods (like Backbone.Events), you will need to write adapter methods that proxy the standard methods to the non-standard methods (for backbone, you would need to supply a `addEventListener(evt_name, fn)` method that calls Backbone's `on(evt_name, fn)` and a `dispatchEvent(evt)` method that calls Backbone's `trigger(evt_name, evt)`).
+
+Lightning Layout's `dispatchEvent()` respects `evt.stopImmediatePropagation()`, but only if `evt.isImmediatePropagationStopped()` is supported by the browser/runtime. Likewise Lightning Layout's event propagation respects `evt.stopPropagation()`, but only if  `evt.isPropagationStopped()` is supported by the browser/runtime.
 
 See the footer click handling in `index.html` (http://prust.github.io/lightning-layout/index.html) for an example of event support.
 
