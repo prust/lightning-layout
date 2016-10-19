@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Canvas Boilerplate</title>
+    <!-- from http://weworkweplay.com/play/retinafy-your-canvas/ -->
+    <style type="text/css">
+      *,html{
+        margin: 0;padding: 0;
+      }
+      canvas { 
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body onload="setup();">
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript">
+      /* GLOBAL */
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      var global_width = window.innerWidth,
+          global_height = window.innerHeight,
+          ratio = 1,
+          canvas = document.getElementById('canvas'),
+          ctx = canvas.getContext('2d');
+      /* SETUP */
+      function setup(){
+        if (ctx){
+          init();
+          requestAnimationFrame(update);
+          window.addEventListener('resize', rescale);
+          rescale();
+        }
+      }
+      function rescale(){
+        global_width = window.innerWidth;
+        global_height = window.innerHeight;
+        if(ctx.webkitBackingStorePixelRatio < 2) ratio = window.devicePixelRatio || 1;
+        canvas.setAttribute('width', global_width*ratio);
+        canvas.setAttribute('height', global_height*ratio);
+        draw();
+      }
+      /* INIT */
+      function init(){
+        draw();
+      }
+      /* DRAW */
+      function drawExample(){
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = "#333";
+        ctx.beginPath();
+        ctx.moveTo((global_width/2)-200, (global_height/2)-200);
+        ctx.bezierCurveTo(150, 100, 350, 100, 400, 250);
+        ctx.stroke();
+      }
+      function draw(){
+        ctx.save();
+        ctx.scale(ratio, ratio);
+        // Execute your draw specific functions between the lines to enable high-dpi drawing
+        // ---------------------------------------------------------------------------------
+        drawExample();
+        // ---------------------------------------------------------------------------------
+        ctx.restore();
+      }
+      /* UPDATE */
+      function update(){ 
+        requestAnimationFrame(update);
+      }
+    </script>
+  </body>
+</html>
