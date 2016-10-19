@@ -144,10 +144,10 @@ See the footer click handling in `index.html` (http://prust.github.io/lightning-
 * `width`, `height` - these will be used to calculate unsupplied edges (for instance if a `right` and `width` properties are given, the `left` will be calculated), can be a number or a percent or the strings "textWidth" / "textHeight" for shrink-wrapped width/height.
 * `font` - [css font string](https://developer.mozilla.org/en-US/docs/Web/CSS/font) defining the font style, size and face
 * `text` - text to display inside the element
-* `padding` - single number used for padding on all four sides (TODO: support separate padding values for each side)
+* `padding` - single number used for padding on all four sides (see To-Do section below for note on `paddingLeft`)
 * `backgroundColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (transparent if not supplied)
-* `borderColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (no border is rendered if this is not supplied)
-* `borderWidth` - number for the width of the border (the border is drawn inside the element, then padding is inside of that, see Box Model)
+* `borderColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (no border is rendered if this is not supplied).
+* `borderWidth` - number for the width of the border (the border is drawn inside the element, then padding is inside of that, see Box Model). See To-Do section below for note on `borderLeftWidth`.
 
 ## Box Model
 
@@ -159,15 +159,14 @@ You can do custom layout or rendering of objects (or to let them handle their ow
 
 ## Production Readiness
 
-LightningLayout is not quite production-ready. The 3 most glaring omissions are text wrapping support (currently only a single line of text is supported), support for rounded rectanges and support for `overflow` behaviors (currently everything is `overflow: visible`). Also, it could use more testing (the 2 examples are somewhat complex and they render correctly, but it could always use more testing).
+LightningLayout is not quite production-ready. The 4 most glaring omissions are listed at the top of the To-Do section below. Also, it could use more testing (the 2 examples are somewhat complex and they render correctly, but it needs to be tested in a wider variety of use cases).
 
 ## To-Do
 
-In addition to the `TODO`'s mentioned above:
-
+* add support for separately specifying padding, borderColor and borderWidth (`paddingLeft`, `borderLeftColor`, `borderLeftWidth`), as well as for shorthand formats that specify 2, 3 or 4 values (ex: `"2px 3px 0 0"`)
 * implement text wrapping
 * add support for rounded rectangles (all corners or individual corners)
 * implement `overflow: auto/scroll/hidden` & `textOverflow: ellipsis`
-* add support for background images
 * allow a space-delimited className property that can apply a set of styles
 * define an example set of styles that mimic Bootstrap buttons, alerts, drop-downs, modals, etc
+* add support for background images
