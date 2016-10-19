@@ -104,16 +104,12 @@ You can view and play with this example live at http://prust.github.io/lightning
 
 ## API
 
-```javascript
-var ll = new LightningLayout([canvas, [defaults]])
-```
+### LightningLayout([canvas, [defaults]])
 
 * `canvas` - optional: the canvas element, used for calling `addEventHandler()` and listening for mouse and touch events. If not supplied, event support will be disabled. See `addEventSupport()` below.
 * `defaults` - an object supplying default styles (currently the only supported default style is `font`, for example: `{font: '12pt Helvetica'}`)
 
-```javascript
-ll.layout(canvas_ctx, element_obj, parent_x1, parent_y1, parent_x2, parent_y2)
-```
+### LightningLayout.layout(canvas_ctx, element_obj, parent_x1, parent_y1, parent_x2, parent_y2)
 
 The `layout()` method walks the element object graph and calculates the layout, setting 4 properties on each element (`_layout_x1`, `_layout_x2`, `_layout_y1`, `_layout_y2`).
 
@@ -122,15 +118,11 @@ The `layout()` method walks the element object graph and calculates the layout, 
 * `parent_x1`, `parent_y1` - the top-left coordinates of the canvas, typically `0, 0`
 * `parent_x2`, `parent_y2` - the bottom-right coordinates of the canvas, typically the width and height of the canvas
 
-```javascript
-ll.render(canvas_ctx, element_obj)
-```
+### LightningLayout.render(canvas_ctx, element_obj)
 
 The `render()` method walks the element object graph and uses the 4 calculated layout properties to draw the elements to the canvas.
 
-```javascript
-ll.addEventSupport(obj[, should_cascade])
-```
+### LightningLayout.addEventSupport(obj[, should_cascade])
 
 `addEventSupport()` adds basic event support to a javascript object by implementing two functions: `addEventListener(evt_name, fn)` and `dispatchEvent(evt)`. These functions dynamically add an object property, `._evt_handlers = {}`, the first time `addEventListener()` is called. If your objects share a common prototype, you can pass that for better performance: `ll.addEventSupport(MyObject.prototype)`. Or, if you want to decorate every object in the tree, supply `true` for `should_cascade`.
 
