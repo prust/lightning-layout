@@ -42,16 +42,18 @@
         var y1 = parent_y1;
         var x2 = parent_x2;
         var y2 = parent_y2;
-        
+        var parent_height = y2 - y1;
+        var parent_width = x2 - x1;
+
         if (widget.top != null)
-          y1 += widget.top;
+          y1 += val(widget.top, parent_height);
         else if (widget.bottom != null && widget.height != null)
-          y1 = y2 - widget.bottom - widget.height;
+          y1 = y2 - val(widget.bottom, parent_height) - widget.height;
         if (widget.left != null)
-          x1 += widget.left;
+          x1 += val(widget.left, parent_width);
         
         if (widget.text) {
-          ctx.font = 'bold 12pt arial';
+          ctx.font = '12pt Helvetica';
           var metrics = ctx.measureText(widget.text);
           metrics.height = 12;
         }
@@ -59,16 +61,16 @@
         var padding = widget.padding || 0;
 
         if (widget.bottom != null)
-          y2 -= widget.bottom;
+          y2 -= val(widget.bottom, parent_height);
         else if (widget.height != null)
-          y2 = y1 + widget.height;
+          y2 = y1 + val(widget.height, parent_height);
         else if (metrics)
           y2 = y1 + metrics.height + padding * 2;
 
         if (widget.right != null)
-          x2 -= widget.right;
+          x2 -= val(widget.right, parent_width);
         else if (widget.width != null)
-          x2 = x1 + widget.width;
+          x2 = x1 + val(widget.width, parent_width);
         else if (metrics != null)
           x2 = x1 + metrics.width + padding * 2;
 
@@ -93,6 +95,13 @@
             drawWidget(child, x1 + padding, y1 + padding, x2 - padding, y2 - padding);
           });
         }
+      }
+
+      function val(value, parent_value) {
+        if (typeof value == 'string' && value[value.length - 1] == '%')
+          return parseInt(value.slice(0, -1), 10) / 100 * parent_value;
+        else
+          return value;
       }
 
       function update() {
@@ -126,17 +135,43 @@
       };
 
       var layout2 = {
-        backgroundColor: "#2C425C",
-        height: 200,
-        bottom: 0,
-        color: "#FFFFFF",
         children: [{
-          borderColor: "red",
-          borderWidth: 2,
-          backgroundColor: "#6BFEF2",
+          width: "100%",
+          borderColor: "#cccccc",
+          borderWidth: 1,
+          backgroundColor: "#eeeeee",
+          height: 100,
           padding: 10,
-          color: "#32363B",
-          text: "Hello World"
+          color: "#666666",
+          text: "Header content here"
+        }, {
+          top: 100,
+          bottom: 100,
+          children: [{
+            text: 'Left sidebar',
+            padding: 10,
+            color: 'black',
+            width: '20%',
+            height: '100%',
+            backgroundColor: '#dddddd'
+          }, {
+            text: 'Right sidebar',
+            color: 'black',
+            padding: 10,
+            right: 0,
+            left: '80%', // TODO: figure out why width: 20% didn't work
+            height: '100%',
+            backgroundColor: '#dddddd'
+          }]
+        }, {
+          text: 'Footer',
+          color: 'white',
+          padding: 10,
+          bottom: 0,
+          height: 100,
+          width: '100%',
+          backgroundColor: '#cccccc',
+          borderColor: '#999999'
         }]
       };
     </script>
