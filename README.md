@@ -24,18 +24,9 @@ Include lightning-layout.js in your page and it will define a global `LightningL
 
 ```javascript
 var element_obj = {
-  backgroundColor: "#2C425C",
-  width: 200,
-  height: 200,
-  color: "#FFFFFF",
-  children: [{
-    width: "textWidth",
-    height: "textHeight",
-    backgroundColor: "#6BFEF2",
-    color: "#32363B",
-    padding: 10,
-    text: "Hello World"
-  }]
+  backgroundColor: "#2C425C", width: 200, height: 200, color: "#FFFFFF", children: [
+    { text: "Hello World", width: "textWidth", height: "textHeight", backgroundColor: "#6BFEF2", color: "#32363B", padding: 10 }
+  ]
 };
 
 var canvas = document.getElementById('canvas'),
@@ -53,40 +44,14 @@ This is basically the Gibbon example from [Jafar Husain's presentation](https://
 
 ```javascript
 var element_obj = {
-  children: [{
-    borderColor: "#cccccc",
-    borderWidth: 1,
-    backgroundColor: "#eeeeee",
-    height: 100,
-    padding: 10,
-    color: "#666666",
-    text: "Header content here"
-  }, {
-    top: 100,
-    bottom: 100,
-    children: [{
-      text: 'Left sidebar',
-      padding: 10,
-      color: 'black',
-      width: '20%',
-      backgroundColor: '#dddddd'
-    }, {
-      text: 'Right sidebar',
-      color: 'black',
-      padding: 10,
-      right: 0,
-      width: '20%',
-      backgroundColor: '#dddddd'
-    }]
-  }, {
-    text: 'Footer',
-    color: 'white',
-    padding: 10,
-    bottom: 0,
-    height: 100,
-    backgroundColor: '#cccccc',
-    borderColor: '#999999'
-  }]
+  children: [
+    { text: "Header content here", borderColor: "#cccccc", borderWidth: 1, backgroundColor: "#eeeeee", height: 100, padding: 10, color: "#666666" },
+    { top: 100, bottom: 100, children: [
+        { text: 'Left sidebar', padding: 10, color: 'black', width: '20%', backgroundColor: '#dddddd' },
+        { text: 'Right sidebar', color: 'black', padding: 10, right: 0, width: '20%', backgroundColor: '#dddddd' }
+    ]},
+    { text: 'Footer', color: 'white', padding: 10, bottom: 0, height: 100, backgroundColor: '#cccccc', borderColor: '#999999'}
+  ]
 };
 
 var canvas = document.getElementById('canvas'),
@@ -168,6 +133,7 @@ These need to be implemented in the layout engine itself:
 * add support for rounded rectangles (all corners or individual corners)
 * implement `overflow: auto/scroll/hidden` & `textOverflow: ellipsis`
 * implement `position: "flow-x"` and `position: "flow-y"`. This would enable clients to easily display all the options in an option menu, for instance, without pulling into our laps all the complexities of `position: "static"` (the CSS default positioning), which has to place items in a row and then wrap them down to the next row, while dealing with variable height items, etc.
+* add support for passing in a top-level array instead of a top-level object
 * allow a space-delimited className property that can apply a set of styles
 * add support for background images
 * make a more friendly method of custom rendering/layout (emitting an event or providing a hook)
