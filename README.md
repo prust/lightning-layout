@@ -30,9 +30,9 @@ lightningLayout(canvas_ctx, element_obj, parent_x1, parent_y1, parent_x2, parent
 ## Supported style properties
 
 * `left`, `right`, `top`, `bottom` - these can be numbers or percentages and will position the edge of the element relative to its parent
-* `width`, `height` - these will be used to calculate unsupplied edges (for instance if a `right` and `width` properties are given, the `left` will be calculated)
+* `width`, `height` - these will be used to calculate unsupplied edges (for instance if a `right` and `width` properties are given, the `left` will be calculated), can be a number or a percent or the strings "textWidth" / "textHeight" for shrink-wrapped width/height.
 * `font` - [css font string](https://developer.mozilla.org/en-US/docs/Web/CSS/font) defining the font style, size and face
-* `text` - text to display inside the element (if `width` and `right` are not supplied, the element is "shrink-wrapped" to the text; the same things happens vertically if `height` and `bottom` are not supplied). If no text is supplied, the element will default to 100% width and 100% height, respectively.
+* `text` - text to display inside the element
 * `padding` - single number used for padding on all four sides (TODO: support separate padding values for each side)
 * `backgroundColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (transparent if not supplied)
 * `borderColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (no border is rendered if this is not supplied)
@@ -47,6 +47,8 @@ var layout = {
   height: 200,
   color: "#FFFFFF",
   children: [{
+    width: "textWidth",
+    height: "textHeight",
     backgroundColor: "#6BFEF2",
     color: "#32363B",
     padding: 10,
@@ -68,7 +70,6 @@ This is basically the Gibbon example from [Jafar Husain's presentation](https://
 ```javascript
 var layout = {
   children: [{
-    width: "100%",
     borderColor: "#cccccc",
     borderWidth: 1,
     backgroundColor: "#eeeeee",
@@ -84,7 +85,6 @@ var layout = {
       padding: 10,
       color: 'black',
       width: '20%',
-      height: '100%',
       backgroundColor: '#dddddd'
     }, {
       text: 'Right sidebar',
@@ -92,7 +92,6 @@ var layout = {
       padding: 10,
       right: 0,
       width: '20%',
-      height: '100%',
       backgroundColor: '#dddddd'
     }]
   }, {
@@ -101,7 +100,6 @@ var layout = {
     padding: 10,
     bottom: 0,
     height: 100,
-    width: '100%',
     backgroundColor: '#cccccc',
     borderColor: '#999999'
   }]
@@ -124,9 +122,9 @@ In addition to the `TODO`'s mentioned above:
 
 * implement text wrapping
 * listen for mouse events on the canvas and "bubble" them to the appropriate lightweight elements
+* add support for rounded rectangles (all corners or individual corners)
 * implement `overflow: auto/scroll/hidden` & `textOverflow: ellipsis`
 * allow objects to handle their own rendering, for instance a canvas-based text-input control ([here](https://github.com/goldfire/CanvasInput), [here](https://github.com/claydotio/Canvas-Input/) or [here](https://github.com/barmalei/zebra))
-* add support for background (and foreground?) images
-* add support for rounded rectangles (all corners or individual corners)
+* add support for background images
 * allow a space-delimited className property that can apply a set of styles
 * define an example set of styles that mimic Bootstrap buttons, alerts, drop-downs, modals, etc

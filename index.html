@@ -56,59 +56,57 @@
           return dpr / bsr;
       }
 
-      var layout1 = {
-        backgroundColor: "#2C425C",
-        width: 200,
-        height: 200,
-        color: "#FFFFFF",
-        children: [{
-          backgroundColor: "#6BFEF2",
-          color: "#32363B",
-          padding: 10,
-          text: "Hello World"
-        }]
-      };
+var layout1 = {
+  backgroundColor: "#2C425C",
+  width: 200,
+  height: 200,
+  color: "#FFFFFF",
+  children: [{
+    width: "textWidth",
+    height: "textHeight",
+    backgroundColor: "#6BFEF2",
+    color: "#32363B",
+    padding: 10,
+    text: "Hello World"
+  }]
+};
 
-      var layout2 = {
-        children: [{
-          width: "100%",
-          borderColor: "#cccccc",
-          borderWidth: 1,
-          backgroundColor: "#eeeeee",
-          height: 100,
-          padding: 10,
-          color: "#666666",
-          text: "Header content here"
-        }, {
-          top: 100,
-          bottom: 100,
-          children: [{
-            text: 'Left sidebar',
-            padding: 10,
-            color: 'black',
-            width: '20%',
-            height: '100%',
-            backgroundColor: '#dddddd'
-          }, {
-            text: 'Right sidebar',
-            color: 'black',
-            padding: 10,
-            right: 0,
-            width: '20%',
-            height: '100%',
-            backgroundColor: '#dddddd'
-          }]
-        }, {
-          text: 'Footer',
-          color: 'white',
-          padding: 10,
-          bottom: 0,
-          height: 100,
-          width: '100%',
-          backgroundColor: '#cccccc',
-          borderColor: '#999999'
-        }]
-      };
+var layout2 = {
+  children: [{
+    borderColor: "#cccccc",
+    borderWidth: 1,
+    backgroundColor: "#eeeeee",
+    height: 100,
+    padding: 10,
+    color: "#666666",
+    text: "Header content here"
+  }, {
+    top: 100,
+    bottom: 100,
+    children: [{
+      text: 'Left sidebar',
+      padding: 10,
+      color: 'black',
+      width: '20%',
+      backgroundColor: '#dddddd'
+    }, {
+      text: 'Right sidebar',
+      color: 'black',
+      padding: 10,
+      right: 0,
+      width: '20%',
+      backgroundColor: '#dddddd'
+    }]
+  }, {
+    text: 'Footer',
+    color: 'white',
+    padding: 10,
+    bottom: 0,
+    height: 100,
+    backgroundColor: '#cccccc',
+    borderColor: '#999999'
+  }]
+};
     </script>
   </body>
 </html>
