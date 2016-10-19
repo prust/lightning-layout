@@ -18,8 +18,10 @@
     this._layout(ctx, element_obj, parent_x1, parent_y1, parent_x2, parent_y2);
     if (element_obj.children) {
       var padding = element_obj.padding || 0;
+      var border_width = element_obj.borderWidth || 0;
+      var offset = padding + border_width;
       element_obj.children.forEach(function(child) {
-        this.layout(ctx, child, element_obj._layout_x1 + padding, element_obj._layout_y1 + padding, element_obj._layout_x2 - padding, element_obj._layout_y2 - padding);
+        this.layout(ctx, child, element_obj._layout_x1 + offset, element_obj._layout_y1 + offset, element_obj._layout_x2 - offset, element_obj._layout_y2 - offset);
       }.bind(this));
     }
   };
@@ -44,14 +46,15 @@
 
     // calc textWidth / textHeight values
     var padding = element_obj.padding || 0;
+    var border_width = element_obj.borderWidth || 0;
     var width, height;
     if (element_obj.width == 'textWidth' || element_obj.height == 'textHeight') {
       if (element_obj.text) {
         ctx.font = element_obj.font || this.defaultFont;
         var metrics = ctx.measureText(element_obj.text);
         metrics.height = this.calcTextHeight(element_obj.font || this.defaultFont);
-        height = metrics.height + padding * 2;
-        width = metrics.width + padding * 2;
+        height = metrics.height + (padding + border_width) * 2;
+        width = metrics.width + (padding + border_width) * 2;
       }
       else {
         width = height = 0;
@@ -98,6 +101,7 @@
     var y1 = element_obj._layout_y1;
     var y2 = element_obj._layout_y2;
     var padding = element_obj.padding || 0;
+    var border_width = element_obj.borderWidth || 0;
 
     if (element_obj.backgroundColor) {
       ctx.fillStyle = element_obj.backgroundColor;
@@ -106,15 +110,16 @@
 
     if (element_obj.borderColor) {
       ctx.strokeStyle = element_obj.borderColor;
-      ctx.lineWidth = element_obj.borderWidth;
-      ctx.strokeRect(x1, y1, x2-x1, y2-y1);
+      var width = ctx.lineWidth = element_obj.borderWidth;
+      var offset = width / 2;
+      ctx.strokeRect(x1 + offset, y1 + offset, x2-x1-width, y2-y1-width);
     }
 
     if (element_obj.text) {
       ctx.font = element_obj.font || this.defaultFont;
       ctx.fillStyle = element_obj.color;
       var text_height = this.calcTextHeight(element_obj.font || this.defaultFont);
-      ctx.fillText(element_obj.text, x1 + padding, y1 + text_height + padding);
+      ctx.fillText(element_obj.text, x1 + (padding + border_width), y1 + text_height + (padding + border_width));
     }
   };
 

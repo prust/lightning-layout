@@ -96,7 +96,7 @@ ll.render(ctx, element_obj);
 
 This renders as:
 
-<img src="http://prust.github.io/lightning-layout/example-2-2x.png" width="878" alt="complex layout example" srcset="http://prust.github.io/lightning-layout/example-2-1x.png 1x, http://prust.github.io/lightning-layout/example-2-2x.png 2x"/>
+<img src="http://prust.github.io/lightning-layout/example-2-2x.png" width="877" alt="complex layout example" srcset="http://prust.github.io/lightning-layout/example-2-1x.png 1x, http://prust.github.io/lightning-layout/example-2-2x.png 2x"/>
 
 You can view and play with this example live at http://prust.github.io/lightning-layout.
 
@@ -147,7 +147,11 @@ See the footer click handling in `index.html` (http://prust.github.io/lightning-
 * `padding` - single number used for padding on all four sides (TODO: support separate padding values for each side)
 * `backgroundColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (transparent if not supplied)
 * `borderColor` - [css color string](https://developer.mozilla.org/en-US/docs/Web/CSS/color) for the border (no border is rendered if this is not supplied)
-* `borderWidth` - number for the width of the border (TODO: render the borders inside the element instead of half inside and half outside)
+* `borderWidth` - number for the width of the border (the border is drawn inside the element, then padding is inside of that, see Box Model)
+
+## Box Model
+
+There is no support for margins, since elements are positioned based on their parent, not sibling or "flow", and margins would overlap in meaning with the top/right/bottom/left properties. Borders and padding are both drawn *inside* the element (the border first, then padding is inside of that. For example: if there is a border of 1px and a padding of 2px, the inner width (the space reserved for text and child elements) would be 6px less than the outer width (`(1px + 2px) * 2`).
 
 ## Custom element rendering or layout
 
