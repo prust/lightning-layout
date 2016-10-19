@@ -43,16 +43,14 @@ This is basically the Gibbon example from [Jafar Husain's presentation](https://
 ## Example 2
 
 ```javascript
-var element_obj = {
-  children: [
-    { text: "Header content here", borderColor: "#cccccc", borderWidth: 1, backgroundColor: "#eeeeee", height: 100, padding: 10, color: "#666666" },
-    { top: 100, bottom: 100, children: [
-        { text: 'Left sidebar', padding: 10, color: 'black', width: '20%', backgroundColor: '#dddddd' },
-        { text: 'Right sidebar', color: 'black', padding: 10, right: 0, width: '20%', backgroundColor: '#dddddd' }
-    ]},
-    { text: 'Footer', color: 'white', padding: 10, bottom: 0, height: 100, backgroundColor: '#cccccc', borderColor: '#999999'}
-  ]
-};
+var element_obj = { children: [
+  { text: "Header content here", borderColor: "#cccccc", borderWidth: 1, backgroundColor: "#eeeeee", height: 100, padding: 10, color: "#666666" },
+  { top: 100, bottom: 100, children: [
+      { text: 'Left sidebar', padding: 10, color: 'black', width: '20%', backgroundColor: '#dddddd' },
+      { text: 'Right sidebar', color: 'black', padding: 10, right: 0, width: '20%', backgroundColor: '#dddddd' }
+  ]},
+  { text: 'Footer', color: 'white', padding: 10, bottom: 0, height: 100, backgroundColor: '#cccccc', borderColor: '#999999'}
+]};
 
 var canvas = document.getElementById('canvas'),
 var ctx = canvas.getContext('2d');
