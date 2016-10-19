@@ -104,3 +104,5 @@ lightningLayout(ctx, layout, 0, 0, canvas.width, canvas.height);
 This renders as:
 
 ![complex layout example](http://prust.github.io/lightning-layout/example-2.png)
+
+You can view and play with this example live at http://prust.github.io/lightning-layout.
