@@ -1,7 +1,6 @@
 <html>
   <head>
     <title>Canvas Boilerplate</title>
-    <!-- from http://weworkweplay.com/play/retinafy-your-canvas/ -->
     <style type="text/css">
       *,html{
         margin: 0;padding: 0;
@@ -18,24 +17,24 @@
 
       var global_width = window.innerWidth,
           global_height = window.innerHeight,
-          ratio = 1,
+          ratio = getRatio(),
           canvas = document.getElementById('canvas'),
           ctx = canvas.getContext('2d');
 
       function setup() {
-        init();
         requestAnimationFrame(update);
         addEventListener('resize', rescale);
         rescale();
       }
 
-      function rescale(){
+      function rescale() {
         global_width = window.innerWidth;
         global_height = window.innerHeight;
-        if (ctx.webkitBackingStorePixelRatio < 2)
-          ratio = window.devicePixelRatio || 1;
-        canvas.setAttribute('width', global_width*ratio);
-        canvas.setAttribute('height', global_height*ratio);
+        ratio = getRatio();
+        canvas.width = global_width * ratio;
+        canvas.height = global_height * ratio;
+        canvas.style.width = global_width + "px";
+        canvas.style.height = global_height + "px";
         draw();
       }
 
@@ -99,16 +98,29 @@
         }
       }
 
-      function draw(){
+      function draw() {
         ctx.save();
-        ctx.scale(ratio, ratio);
+        //ctx.scale(ratio, ratio);
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
         drawWidget(layout2, 0, 0, global_width * ratio, global_height * ratio);
         ctx.restore();
       }
 
-      function update(){ 
+      function update() { 
         requestAnimationFrame(update);
+      }
+
+      function getRatio() {
+          var ctx = document.createElement("canvas").getContext("2d"),
+              dpr = window.devicePixelRatio || 1,
+              bsr = ctx.webkitBackingStorePixelRatio ||
+                    ctx.mozBackingStorePixelRatio ||
+                    ctx.msBackingStorePixelRatio ||
+                    ctx.oBackingStorePixelRatio ||
+                    ctx.backingStorePixelRatio || 1;
+
+          return dpr / bsr;
       }
 
       var layout1 = {
